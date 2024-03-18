@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:41:17 by malee             #+#    #+#             */
-/*   Updated: 2023/09/17 00:23:31 by malee            ###   ########.fr       */
+/*   Updated: 2024/03/19 00:37:53 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	**ft_split_words(char const *s, char c, char **s2, int num_words)
 			word_len++;
 		}
 		s2[word] = (char *)malloc(sizeof(char) * (word_len + 1));
-		if (!s2)
+		if (!s2[word])
 			return (free_array(s2, word));
 		ft_putword(s2[word], s, i, word_len);
 		word_len = 0;
