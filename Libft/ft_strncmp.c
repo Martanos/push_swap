@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:37:45 by malee             #+#    #+#             */
-/*   Updated: 2023/09/14 19:51:13 by malee            ###   ########.fr       */
+/*   Updated: 2024/04/18 18:27:40 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,16 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	idx;
+	size_t	i;
 
-	if (n == 0)
-		return (0);
-	idx = 0;
-	while (idx < n)
+	i = 0;
+	while (i < n && s1[i] != '\0' && s2[i] != '\0')
 	{
-		if (s1[idx] && s1[idx] == s2[idx])
-		{
-			while (s1[idx] && s1[idx] == s2[idx] && idx < n)
-				idx++;
-		}
-		else
-		{
-			return ((unsigned char)s1[idx] - (unsigned char)s2[idx]);
-		}
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
 	}
-	return (0);
+	if (i == n)
+		return (0);
+	return (s1[i] - s2[i]);
 }

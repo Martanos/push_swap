@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:59:16 by malee             #+#    #+#             */
-/*   Updated: 2023/09/16 22:07:38 by malee            ###   ########.fr       */
+/*   Updated: 2024/04/08 15:42:35 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	idx;
 	size_t	s_len;
 
-	s_len = ft_strlen(s);
+	s_len = ft_strlen((char *)s);
 	if (!s || *s == '\0' || start >= s_len)
 	{
 		sub = malloc(1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 21:16:16 by malee             #+#    #+#             */
-/*   Updated: 2023/09/16 19:13:13 by malee            ###   ########.fr       */
+/*   Updated: 2024/04/08 15:41:50 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strdup(const char *s)
 	size_t	idx;
 	char	*dupper;
 
-	dupper = malloc((ft_strlen(s) + 1) * sizeof(char));
+	dupper = malloc((ft_strlen((char *)s) + 1) * sizeof(char));
 	if (dupper == NULL)
 		return (NULL);
 	idx = -1;

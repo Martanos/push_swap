@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 21:37:04 by malee             #+#    #+#             */
-/*   Updated: 2023/09/16 18:17:04 by malee            ###   ########.fr       */
+/*   Updated: 2024/04/08 15:41:19 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strrchr(const char *input, int c)
 {
 	long long	idx;
 
-	idx = ft_strlen(input);
+	idx = ft_strlen((char *)input);
 	if (c == '\0')
 		return ((char *)input + idx);
 	while (idx >= 0)

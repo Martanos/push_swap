@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 00:37:39 by malee             #+#    #+#             */
-/*   Updated: 2023/09/16 00:38:52 by malee            ###   ########.fr       */
+/*   Updated: 2024/04/08 15:44:09 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 {
-	size_t	idx;
+	ssize_t	idx;
 	char	*tmp;
 
 	tmp = (char *)malloc(sizeof(char) * (ft_strlen((char *)s) + 1));

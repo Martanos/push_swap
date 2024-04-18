@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 19:33:15 by malee             #+#    #+#             */
-/*   Updated: 2023/09/14 19:49:32 by malee            ###   ########.fr       */
+/*   Updated: 2024/04/08 15:40:58 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	}
 	if (i < size)
 		dst[i + j] = '\0';
-	return (i + ft_strlen(src));
+	return (i + ft_strlen((char *)src));
 }

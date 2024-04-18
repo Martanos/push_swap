@@ -6,34 +6,43 @@
 #    By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 23:01:22 by malee             #+#    #+#              #
-#    Updated: 2024/03/18 23:03:29 by malee            ###   ########.fr        #
+#    Updated: 2024/04/19 01:33:37 by malee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-
-INCLUDES = includes
-
-SRCS = srcs/
-
 CC = cc
+CFLAGS = -Wall -Wextra -Werror -g -I$(LIBFT_DIR) -I$(INCLUDES_DIR) -I$(SRCS_DIR)
+INCLUDES_DIR = includes
+LIBFT_DIR = Libft
+SRCS_DIR = srcs
 
-CFLAGS = -Wall -Wextra -Werror -g
+FILES = push_swap.c
+SRCS = $(addprefix $(SRCS_DIR)/,$(FILES))
+OBJS = $(SRCS:.c=.o)
 
-OBJECTS = $(SRCS:.c=.o)
+all: libft $(NAME)
 
-all: $(NAME)
+libft:
+	$(MAKE) -C $(LIBFT_DIR)
 
-$(NAME):
-	make -C Libft
-	mv ./Libft/libft.a ./
-	make fclean -C Libft
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) -I$(INCLUDES) -ILibft libft.a
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFT_DIR) -lft
+
+$(OBJS): | $(INCLUDES_DIR)
+
+$(INCLUDES_DIR):
+	mkdir -p $(INCLUDES_DIR)
+
+$(SRCS_DIR)/%.o: $(SRCS_DIR)/%.c $(INCLUDES_DIR)/push_swap.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJECTS) $(NAME).a libft.a
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -f $(OBJS)
 
 fclean: clean
-	rm -rf $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
 
 re: fclean all

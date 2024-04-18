@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:27:37 by malee             #+#    #+#             */
-/*   Updated: 2023/09/14 20:50:35 by malee            ###   ########.fr       */
+/*   Updated: 2024/04/18 21:45:52 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,30 @@
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+ssize_t	ft_atoi(const char *str)
 {
-	int	idx;
-	int	neg;
-	int	res;
+	int		is_negative;
+	ssize_t	result;
+	ssize_t	max_value;
 
-	idx = 0;
-	neg = 1;
-	res = 0;
-	while (str[idx] == ' ' || (str[idx] >= 9 && str[idx] <= 13))
-		idx++;
-	if (str[idx] == '-' || str[idx] == '+')
+	max_value = ((ssize_t)(((size_t)-1) >> 1));
+	is_negative = 1;
+	result = 0;
+	while ((*str >= '\t' && *str <= '\r') || *str == ' ')
+		str++;
+	while (*str == '+' || *str == '-')
 	{
-		if (str[idx] == '-')
-			neg *= -1;
-		idx++;
+		if (*str++ == '-')
+			is_negative = -1;
 	}
-	while (str[idx] >= '0' && str[idx] <= '9')
+	while (*str >= '0' && *str <= '9')
 	{
-		res = (str[idx] - '0') + (res * 10);
-		idx++;
+		if (result > max_value / 10
+			|| (result == max_value / 10
+				&& *str - '0' > max_value % 10))
+			return (max_value * is_negative);
+		else
+			result = (result * 10) + (*str++ - '0');
 	}
-	return (res * neg);
+	return (result * is_negative);
 }
