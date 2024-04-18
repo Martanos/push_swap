@@ -6,7 +6,7 @@
 /*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:40:06 by malee             #+#    #+#             */
-/*   Updated: 2024/04/19 02:25:18 by malee            ###   ########.fr       */
+/*   Updated: 2024/04/19 03:03:26 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	check_dup(char *str, char **argv)
 {
 	while (*argv)
 	{
-		if (ft_strncmp(str, *argv, ft_strlen(str) + 1))
+		if (ft_strncmp(str, *argv, ft_strlen(str) + 1) == 0)
 			error();
 		argv++;
 	}
@@ -38,6 +38,9 @@ static void	check_args(int argc, char **argv)
 	while (*argv)
 	{
 		sign_count = 0;
+		if (ft_atoi(*argv) > INT_MAX || ft_atoi(*argv) < INT_MIN)
+			error();
+		check_dup(*argv, argv + 1);
 		while (**argv)
 		{
 			if (**argv == '-' || **argv == '+')
@@ -49,9 +52,6 @@ static void	check_args(int argc, char **argv)
 				error();
 			(*argv)++;
 		}
-		if (ft_atoi(*argv) > INT_MAX || ft_atoi(*argv) < INT_MIN)
-			error();
-		check_dup(*argv, argv + 1);
 		argv++;
 	}
 }

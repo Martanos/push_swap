@@ -1,14 +1,5 @@
 #!/bin/bash
 
-# Compile the C code
-make
-
-# Check if compilation was successful
-if [ $? -ne 0 ]; then
-    echo "Compilation failed"
-    exit 1
-fi
-
 # Test cases
 echo "Testing with no arguments..."
 ./push_swap
@@ -57,6 +48,3 @@ if [ $? -eq 1 ]; then
 else
     echo "Test failed: Expected error for overflow/underflow values"
 fi
-
-# Clean up
-make fclean
