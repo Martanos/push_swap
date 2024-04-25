@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+         #
+#    By: malee <malee@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 23:01:22 by malee             #+#    #+#              #
-#    Updated: 2024/04/19 01:33:37 by malee            ###   ########.fr        #
+#    Updated: 2024/04/26 01:14:11 by malee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ INCLUDES_DIR = includes
 LIBFT_DIR = Libft
 SRCS_DIR = srcs
 
-FILES = push_swap.c
+FILES = push_swap.c stack_utils.c node_utils.c
 SRCS = $(addprefix $(SRCS_DIR)/,$(FILES))
 OBJS = $(SRCS:.c=.o)
 
