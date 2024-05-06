@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 01:34:01 by malee             #+#    #+#             */
-/*   Updated: 2024/04/26 20:46:07 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/06 20:57:31 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef struct s_stack
 	t_node			*stack_head;
 	t_node			*stack_tail;
 	int				is_sorted;
-	t_node			*min_value;
+	ssize_t			min_value;
+	ssize_t			max_value;
 }					t_stack;
 
 typedef struct s_move_handlers
@@ -46,4 +47,8 @@ void				swap_head(t_stack *stack);
 void				push(t_stack *src, t_stack *dest);
 void				rotate(t_stack *stack);
 void				reverse_rotate(t_stack *stack);
+int					is_sorted_ascended(t_stack *stack);
+int					is_sorted_descended(t_stack *stack);
+void				sort_lists(t_stack **stack_a, t_stack **stack_b);
+
 #endif
