@@ -6,18 +6,24 @@
 #    By: malee <malee@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 23:01:22 by malee             #+#    #+#              #
-#    Updated: 2024/05/06 20:58:45 by malee            ###   ########.fr        #
+#    Updated: 2024/05/07 02:30:50 by malee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -I$(LIBFT_DIR) -I$(INCLUDES_DIR) -I$(SRCS_DIR)
+CFLAGS = -Os -Wall -Wextra -Werror -g -I$(LIBFT_DIR) -I$(INCLUDES_DIR) -I$(SRCS_DIR)
 INCLUDES_DIR = includes
 LIBFT_DIR = Libft
 SRCS_DIR = srcs
 
-FILES = push_swap.c stack_utils.c node_utils.c algorithim_utils.c move_utils.c
+FILES = push_swap.c \
+		stack_utils.c \
+		stack_utils_2.c \
+		node_utils.c \
+		algorithim_utils.c \
+		move_utils.c \
+		median_util.c
 SRCS = $(addprefix $(SRCS_DIR)/,$(FILES))
 OBJS = $(SRCS:.c=.o)
 

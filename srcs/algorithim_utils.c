@@ -6,35 +6,20 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 01:25:41 by malee             #+#    #+#             */
-/*   Updated: 2024/05/06 20:57:48 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/07 02:52:58 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	getmiddlevalue(t_stack *stack)
-{
-	t_node	*slow;
-	t_node	*fast;
-
-	slow = stack->stack_head;
-	fast = stack->stack_head;
-	while (fast->next && fast->next->next)
-	{
-		slow = slow->next;
-		fast = fast->next->next;
-	}
-	return (slow->value);
-}
 
 void	split_lists(t_stack **stack_a, t_stack **stack_b)
 {
 	ssize_t	pivot;
 	ssize_t	itr;
 
-	pivot = getmiddlevalue(*stack_a);
-	itr = -1;
-	while (itr++ <= (*stack_a)->length)
+	pivot = getmedian(stack_a);
+	itr = 0;
+	while (itr < (*stack_a)->length)
 	{
 		if ((*stack_a)->stack_head->value <= pivot)
 		{
@@ -46,66 +31,81 @@ void	split_lists(t_stack **stack_a, t_stack **stack_b)
 			rotate(stack_a);
 			ft_printf("ra\n");
 		}
+		itr++;
 	}
 }
 
-void	sort_a_swap(t_stack **stack_a, t_stack **stack_b)
+void	sort_b(t_stack **stack_b)
 {
-	if (!is_sorted_descended(*stack_b)
-		&& (*stack_b)->stack_head->value < (*stack_b)->stack_head->next->value)
+	update_stack(stack_b);
+	if ((*stack_b)->stack_head->value < (*stack_b)->stack_head->next->value)
 	{
-		swap_head(stack_a);
 		swap_head(stack_b);
-		ft_printf("ss\n");
+		ft_printf("sb\n");
 	}
 	else
+	{
+		if ((*stack_b)->max_value_pos <= (*stack_b)->length / 2)
+		{
+			while ((*stack_b)->stack_head->value != (*stack_b)->max_value)
+			{
+				rotate(stack_b);
+				ft_printf("rb\n");
+			}
+		}
+		else
+		{
+			while ((*stack_b)->stack_head->value != (*stack_b)->max_value)
+			{
+				reverse_rotate(stack_b);
+				ft_printf("rrb\n");
+			}
+		}
+	}
+}
+
+void	sort_a(t_stack **stack_a)
+{
+	update_stack(stack_a);
+	if ((*stack_a)->stack_head->value > (*stack_a)->stack_head->next->value)
 	{
 		swap_head(stack_a);
 		ft_printf("sa\n");
 	}
-}
-
-void	sort_a(t_stack **stack_a, t_stack **stack_b)
-{
-	if ((*stack_a)->stack_head->value > (*stack_a)->stack_head->next->value)
-		sort_a_swap(stack_a, stack_b);
 	else
 	{
-		if (!is_sorted_descended(*stack_b))
+		if ((*stack_a)->min_value_pos <= (*stack_a)->length / 2)
 		{
-			rotate(stack_a);
-			rotate(stack_b);
-			ft_printf("rr\n");
+			while ((*stack_a)->stack_head->value != (*stack_a)->min_value)
+			{
+				rotate(stack_a);
+				ft_printf("ra\n");
+			}
 		}
 		else
 		{
-			rotate(stack_a);
-			ft_printf("ra\n");
+			while ((*stack_a)->stack_head->value != (*stack_a)->min_value)
+			{
+				reverse_rotate(stack_a);
+				ft_printf("rra\n");
+			}
 		}
 	}
 }
 
 void	sort_lists(t_stack **stack_a, t_stack **stack_b)
 {
+	// print_stacks(*stack_a, *stack_b);
 	split_lists(stack_a, stack_b);
-	while (!is_sorted_ascended(*stack_a) || !is_sorted_descended(*stack_b))
+	// print_stacks(*stack_a, *stack_b);
+	while (!is_sorted_ascended(*stack_a))
+		sort_a(stack_a);
+	while (!is_sorted_descended(*stack_b))
+		sort_b(stack_b);
+	while ((*stack_b)->stack_head != NULL)
 	{
-		if (!is_sorted_ascended(*stack_a))
-			sort_a(stack_a, stack_b);
-		else if ((*stack_b)->stack_head->value < (*stack_b)->stack_head->next->value)
-		{
-			sb(stack_b);
-			ft_printf("sb\n");
-		}
-		else
-		{
-			rb(stack_b);
-			ft_printf("rb\n");
-		}
-	}
-	while (!isEmpty(*stack_b))
-	{
-		pa(stack_b, stack_a);
+		push(stack_b, stack_a);
 		ft_printf("pa\n");
 	}
+	// print_stacks(*stack_a, *stack_b);
 }

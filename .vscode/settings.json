@@ -7,5 +7,6 @@
 		"functional": "c",
 		"tuple": "c",
 		"utility": "c"
-	}
+	},
+	"cmake.configureOnOpen": true
 }

@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 03:35:11 by malee             #+#    #+#             */
-/*   Updated: 2024/05/06 20:57:17 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/07 02:53:36 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 void	init_stack(t_stack **stack, char **argv)
 {
-	ssize_t	value;
-
-	value = 0;
 	if (*stack)
 	{
-		free_nodes(*stack);
+		free_nodes(stack);
 		free(*stack);
 	}
 	*stack = (t_stack *)malloc(sizeof(t_stack));
@@ -29,74 +26,61 @@ void	init_stack(t_stack **stack, char **argv)
 	if (argv)
 	{
 		while (*argv)
-		{
-			value = ft_atoi(*argv);
-			init_node(*stack, atoi(*argv++));
-			if (value < (*stack)->min_value)
-				(*stack)->min_value = value;
-			if (value > (*stack)->max_value)
-				(*stack)->max_value = value;
-		}
-		(*stack)->is_sorted = is_sorted(*stack);
+			init_node(stack, atoi(*argv++));
 	}
+	update_stack(stack);
 }
 
-void	print_stacks(t_stack *stack_a, t_stack *stack_b)
+size_t	get_stack_length(t_stack *stack)
 {
-	t_node	*current_a;
-	t_node	*current_b;
-
-	current_a = stack_a->stack_head;
-	current_b = stack_b->stack_head;
-	ft_printf("-------------------------------\n%s\n");
-	while (current_a || current_b)
-	{
-		if (current_a)
-		{
-			ft_printf("%ld", current_a->value);
-			current_a = current_a->next;
-		}
-		else
-			ft_printf(" ");
-		if (current_b)
-		{
-			ft_printf(" %ld\n", current_b->value);
-			current_b = current_b->next;
-		}
-		else
-			ft_printf("\n");
-	}
-	ft_printf("_ _\na b\n-------------------------------\n");
-}
-
-int	is_sorted_ascended(t_stack *stack)
-{
+	size_t	length;
 	t_node	*current;
 
-	if (stack->length <= 1)
-		return (1);
+	length = 0;
 	current = stack->stack_head;
-	while (current->next)
+	while (current != NULL)
 	{
-		if (current->value > current->next->value)
-			return (0);
+		length++;
 		current = current->next;
 	}
-	return (1);
+	return (length);
 }
 
-int	is_sorted_descended(t_stack *stack)
+void	update_stack(t_stack **stack)
 {
-	t_node	*current;
-
-	if (stack->length <= 1)
-		return (1);
-	current = stack->stack_head;
-	while (current->next)
-	{
-		if (current->value < current->next->value)
-			return (0);
-		current = current->next;
-	}
-	return (1);
+	(*stack)->length = get_stack_length(*stack);
+	(*stack)->is_sorted_asc = is_sorted_ascended(*stack);
+	(*stack)->is_sorted_desc = is_sorted_descended(*stack);
+	(*stack)->min_value = find_smallest(*stack);
+	(*stack)->min_value_pos = find_position(*stack, (*stack)->min_value);
+	(*stack)->max_value = find_largest(*stack);
+	(*stack)->max_value_pos = find_position(*stack, (*stack)->max_value);
 }
+
+// void	print_stacks(t_stack *stack_a, t_stack *stack_b)
+// {
+// 	t_node	*current_a;
+// 	t_node	*current_b;
+
+// 	current_a = stack_a->stack_head;
+// 	current_b = stack_b->stack_head;
+// 	ft_printf("-------------------------------\n%s\n");
+// 	while (current_a || current_b)
+// 	{
+// 		if (current_a)
+// 		{
+// 			ft_printf("%ld", current_a->value);
+// 			current_a = current_a->next;
+// 		}
+// 		else
+// 			ft_printf(" ");
+// 		if (current_b)
+// 		{
+// 			ft_printf(" %ld\n", current_b->value);
+// 			current_b = current_b->next;
+// 		}
+// 		else
+// 			ft_printf("\n");
+// 	}
+// 	ft_printf("_ _\na b\n-------------------------------\n");
+// }
