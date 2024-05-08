@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 03:35:11 by malee             #+#    #+#             */
-/*   Updated: 2024/05/07 02:53:36 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/08 11:46:22 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,20 @@ size_t	get_stack_length(t_stack *stack)
 
 void	update_stack(t_stack **stack)
 {
-	(*stack)->length = get_stack_length(*stack);
-	(*stack)->is_sorted_asc = is_sorted_ascended(*stack);
-	(*stack)->is_sorted_desc = is_sorted_descended(*stack);
-	(*stack)->min_value = find_smallest(*stack);
-	(*stack)->min_value_pos = find_position(*stack, (*stack)->min_value);
-	(*stack)->max_value = find_largest(*stack);
-	(*stack)->max_value_pos = find_position(*stack, (*stack)->max_value);
+	if (!stack)
+		error();
+	else if ((*stack)->stack_head == NULL)
+		ft_memset(*stack, 0, sizeof(t_stack));
+	else
+	{
+		(*stack)->length = get_stack_length(*stack);
+		(*stack)->is_sorted_asc = is_sorted_ascended(*stack);
+		(*stack)->is_sorted_desc = is_sorted_descended(*stack);
+		(*stack)->min_value = find_smallest(*stack);
+		(*stack)->min_value_pos = find_position(*stack, (*stack)->min_value);
+		(*stack)->max_value = find_largest(*stack);
+		(*stack)->max_value_pos = find_position(*stack, (*stack)->max_value);
+	}
 }
 
 // void	print_stacks(t_stack *stack_a, t_stack *stack_b)

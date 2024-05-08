@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithim_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 01:25:41 by malee             #+#    #+#             */
-/*   Updated: 2024/05/07 02:52:58 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/08 11:37:45 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,28 @@
 void	split_lists(t_stack **stack_a, t_stack **stack_b)
 {
 	ssize_t	pivot;
-	ssize_t	itr;
 
 	pivot = getmedian(stack_a);
-	itr = 0;
-	while (itr < (*stack_a)->length)
+	while ((*stack_a)->length > 0 && (*stack_a)->min_value != pivot)
 	{
-		if ((*stack_a)->stack_head->value <= pivot)
+		if ((*stack_a)->min_value_pos <= (*stack_a)->length / 2)
 		{
-			push(stack_a, stack_b);
-			ft_printf("pb\n");
+			while ((*stack_a)->stack_head->value != (*stack_a)->min_value)
+			{
+				rotate(stack_a);
+				ft_printf("ra\n");
+			}
 		}
 		else
 		{
-			rotate(stack_a);
-			ft_printf("ra\n");
+			while ((*stack_a)->stack_head->value != (*stack_a)->min_value)
+			{
+				reverse_rotate(stack_a);
+				ft_printf("rra\n");
+			}
 		}
-		itr++;
+		push(stack_a, stack_b);
+		ft_printf("pb\n");
 	}
 }
 

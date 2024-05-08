@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 00:31:58 by malee             #+#    #+#             */
-/*   Updated: 2024/05/07 02:54:05 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/08 11:53:35 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	push(t_stack **src, t_stack **dest)
 		(*dest)->stack_head = temp;
 	}
 	update_stack(dest);
+	update_stack(src);
 }
 
 void	rotate(t_stack **stack)

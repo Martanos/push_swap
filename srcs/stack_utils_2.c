@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 00:42:14 by malee             #+#    #+#             */
-/*   Updated: 2024/05/07 01:32:55 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/08 11:49:19 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	is_sorted_ascended(t_stack *stack)
 {
 	t_node	*current;
 
-	if (!stack || !stack->stack_head || stack->length <= 1)
+	if (!stack || !stack->stack_head)
 		return (1);
+	if (stack->length <= 1)
+		return (0);
 	current = stack->stack_head;
 	while (current->next)
 	{
@@ -32,8 +34,10 @@ int	is_sorted_descended(t_stack *stack)
 {
 	t_node	*current;
 
-	if (!stack || !stack->stack_head || stack->length <= 1)
+	if (!stack || !stack->stack_head)
 		return (1);
+	if (stack->length <= 1)
+		return (0);
 	current = stack->stack_head;
 	while (current->next)
 	{
@@ -50,7 +54,9 @@ ssize_t	find_largest(t_stack *stack)
 	t_node	*current;
 
 	if (!stack || !stack->stack_head)
-		return (1);
+		return (0);
+	if (stack->length == 1)
+		return (stack->stack_head->value);
 	largest = stack->stack_head->value;
 	current = stack->stack_head->next;
 	while (current != NULL)
@@ -68,7 +74,9 @@ ssize_t	find_smallest(t_stack *stack)
 	t_node	*current;
 
 	if (!stack || !stack->stack_head)
-		return (1);
+		return (0);
+	if (stack->length == 1)
+		return (stack->stack_head->value);
 	smallest = stack->stack_head->value;
 	current = stack->stack_head->next;
 	while (current != NULL)
@@ -86,7 +94,9 @@ ssize_t	find_position(t_stack *stack, ssize_t value)
 	t_node	*current;
 
 	if (!stack || !stack->stack_head)
-		return (-1);
+		return (0);
+	if (stack->length == 1)
+		return (stack->stack_head->value);
 	position = 1;
 	current = stack->stack_head;
 	while (current != NULL)
@@ -96,5 +106,5 @@ ssize_t	find_position(t_stack *stack, ssize_t value)
 		current = current->next;
 		position++;
 	}
-	return (-1);
+	return (0);
 }
