@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
+/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 03:35:11 by malee             #+#    #+#             */
-/*   Updated: 2024/05/08 11:46:22 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/08 20:43:35 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ size_t	get_stack_length(t_stack *stack)
 
 void	update_stack(t_stack **stack)
 {
+	ssize_t	position;
+	t_node	*current;
+
+	position = 1;
 	if (!stack)
 		error();
 	else if ((*stack)->stack_head == NULL)
@@ -57,10 +61,15 @@ void	update_stack(t_stack **stack)
 		(*stack)->length = get_stack_length(*stack);
 		(*stack)->is_sorted_asc = is_sorted_ascended(*stack);
 		(*stack)->is_sorted_desc = is_sorted_descended(*stack);
-		(*stack)->min_value = find_smallest(*stack);
-		(*stack)->min_value_pos = find_position(*stack, (*stack)->min_value);
-		(*stack)->max_value = find_largest(*stack);
-		(*stack)->max_value_pos = find_position(*stack, (*stack)->max_value);
+		(*stack)->min_value = find_smallest_node(stack);
+		(*stack)->max_value = find_largest_node(stack);
+		current = (*stack)->stack_head;
+		while (current->next)
+		{
+			current->position = position;
+			position++;
+			current = current->next;
+		}
 	}
 }
 

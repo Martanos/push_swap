@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 01:34:01 by malee             #+#    #+#             */
-/*   Updated: 2024/05/07 02:53:46 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/08 20:43:12 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,14 @@
 
 typedef struct s_node
 {
+	ssize_t			position;
 	ssize_t			value;
+	int				cheapest_asc;
+	int				cheapest_desc;
+	ssize_t			push_price_asc;
+	ssize_t			push_price_desc;
+	struct s_node	*target_node_asc;
+	struct s_node	*target_node_desc;
 	struct s_node	*next;
 	struct s_node	*prev;
 }					t_node;
@@ -29,34 +36,36 @@ typedef struct s_stack
 	t_node			*stack_tail;
 	int				is_sorted_asc;
 	int				is_sorted_desc;
-	ssize_t			min_value;
-	ssize_t			min_value_pos;
-	ssize_t			max_value;
-	ssize_t			max_value_pos;
+	t_node			*min_value;
+	t_node			*max_value;
 }					t_stack;
 
-typedef struct s_move_handlers
-{
-	char			*specifier;
-	void			(**handlers)(va_list *args);
-}					t_move_handlers;
-
-// void				print_stacks(t_stack *stack_a, t_stack *stack_b);
-void				init_stack(t_stack **stack, char **argv);
-void				init_node(t_stack **stack, ssize_t value);
+// General Utils
 void				error(void);
+// Node Utils
+void				init_node(t_stack **stack, ssize_t value);
 void				free_nodes(t_stack **stack);
-void				swap_head(t_stack **stack);
-void				push(t_stack **src, t_stack **dest);
-void				rotate(t_stack **stack);
-void				reverse_rotate(t_stack **stack);
+void				set_prices(t_stack **stack_a, t_stack **stack_b);
+// Stack utils
+void				init_stack(t_stack **stack, char **argv);
 int					is_sorted_ascended(t_stack *stack);
 int					is_sorted_descended(t_stack *stack);
 void				sort_lists(t_stack **stack_a, t_stack **stack_b);
-ssize_t				find_largest(t_stack *stack);
-ssize_t				find_smallest(t_stack *stack);
-ssize_t				find_position(t_stack *stack, ssize_t value);
+t_node				*find_largest_node(t_stack **stack);
+t_node				*find_smallest_node(t_stack **stack);
 void				update_stack(t_stack **stack);
-ssize_t				getmedian(t_stack **stack);
+// Move utils
+void				pa(t_stack **stack_b, t_stack **stack_a);
+void				pb(t_stack **stack_a, t_stack **stack_b);
+void				sa(t_stack **stack_a);
+void				sb(t_stack **stack_b);
+void				ss(t_stack **stack_a, t_stack **stack_b);
+void				ra(t_stack **stack_a);
+void				rb(t_stack **stack_b);
+void				rr(t_stack **stack_a, t_stack **stack_b);
+void				rra(t_stack **stack_a);
+void				rrb(t_stack **stack_b);
+void				rrr(t_stack **stack_a, t_stack **stack_b);
+t_node				*get_median(t_stack *stack);
 
 #endif

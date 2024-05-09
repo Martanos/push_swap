@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
+/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 00:42:14 by malee             #+#    #+#             */
-/*   Updated: 2024/05/08 11:49:19 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/08 20:42:19 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,63 +48,42 @@ int	is_sorted_descended(t_stack *stack)
 	return (1);
 }
 
-ssize_t	find_largest(t_stack *stack)
+t_node	*find_largest_node(t_stack **stack)
 {
-	ssize_t	largest;
+	t_node	*largest;
 	t_node	*current;
 
-	if (!stack || !stack->stack_head)
+	if (!stack || !(*stack)->stack_head)
 		return (0);
-	if (stack->length == 1)
-		return (stack->stack_head->value);
-	largest = stack->stack_head->value;
-	current = stack->stack_head->next;
+	if ((*stack)->length == 1)
+		return ((*stack)->stack_head);
+	largest = (*stack)->stack_head;
+	current = (*stack)->stack_head;
 	while (current != NULL)
 	{
-		if (current->value > largest)
-			largest = current->value;
+		if (current->value > largest->value)
+			largest = current;
 		current = current->next;
 	}
 	return (largest);
 }
 
-ssize_t	find_smallest(t_stack *stack)
+t_node	*find_smallest_node(t_stack **stack)
 {
-	ssize_t	smallest;
+	t_node	*smallest;
 	t_node	*current;
 
-	if (!stack || !stack->stack_head)
+	if (!stack || !(*stack)->stack_head)
 		return (0);
-	if (stack->length == 1)
-		return (stack->stack_head->value);
-	smallest = stack->stack_head->value;
-	current = stack->stack_head->next;
+	if ((*stack)->length == 1)
+		return ((*stack)->stack_head);
+	smallest = (*stack)->stack_head;
+	current = (*stack)->stack_head;
 	while (current != NULL)
 	{
-		if (current->value < smallest)
-			smallest = current->value;
+		if (current->value < smallest->value)
+			smallest = current;
 		current = current->next;
 	}
 	return (smallest);
-}
-
-ssize_t	find_position(t_stack *stack, ssize_t value)
-{
-	ssize_t	position;
-	t_node	*current;
-
-	if (!stack || !stack->stack_head)
-		return (0);
-	if (stack->length == 1)
-		return (stack->stack_head->value);
-	position = 1;
-	current = stack->stack_head;
-	while (current != NULL)
-	{
-		if (current->value == value)
-			return (position);
-		current = current->next;
-		position++;
-	}
-	return (0);
 }
