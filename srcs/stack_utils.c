@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
+/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 03:35:11 by malee             #+#    #+#             */
-/*   Updated: 2024/05/10 14:35:19 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/11 02:47:28 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	init_stack(t_stack **stack, char **argv)
 	if (argv)
 	{
 		while (*argv)
+		{
 			init_node(stack, atoi(*argv++));
+			update_stack(stack);
+		}
 	}
 	update_stack(stack);
 }
@@ -63,7 +66,7 @@ void	update_stack(t_stack **stack)
 		(*stack)->is_sorted_desc = is_sorted_descended(*stack);
 		(*stack)->min_value = find_smallest_node(stack);
 		(*stack)->max_value = find_largest_node(stack);
-		(*stack)->stack_tail = find_stack_tail(stack);
+		(*stack)->stack_tail = find_stack_tail((*stack)->stack_head);
 		current = (*stack)->stack_head;
 		while (current)
 		{
@@ -74,14 +77,14 @@ void	update_stack(t_stack **stack)
 	}
 }
 
-// void	print_stacks(t_stack *stack_a, t_stack *stack_b)
+// void	print_stacks(t_stack **stack_a, t_stack **stack_b)
 // {
 // 	t_node	*current_a;
 // 	t_node	*current_b;
 
-// 	current_a = stack_a->stack_head;
-// 	current_b = stack_b->stack_head;
-// 	ft_printf("-------------------------------\n%s\n");
+// 	current_a = (*stack_a)->stack_head;
+// 	current_b = (*stack_b)->stack_head;
+// 	ft_printf("-------------------------------\n");
 // 	while (current_a || current_b)
 // 	{
 // 		if (current_a)

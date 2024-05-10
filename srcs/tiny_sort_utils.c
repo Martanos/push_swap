@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:39:12 by malee             #+#    #+#             */
-/*   Updated: 2024/05/08 22:02:11 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/10 18:56:50 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 void	tiny_sort_asc(t_stack **stack)
 {
-	t_node	*highest_node;
-
-	highest_node = (*stack)->min_value;
-	if ((*stack)->stack_head == highest_node)
-		ra(stack);
-	else if ((*stack)->stack_head->next == highest_node)
-		rra(stack);
-	if ((*stack)->stack_head->value > (*stack)->stack_head->next->value)
+	while ((*stack)->stack_tail != (*stack)->max_value)
+	{
+		if ((*stack)->max_value == (*stack)->stack_head)
+			ra(stack);
+		else
+			rra(stack);
+	}
+	if ((*stack)->min_value != (*stack)->stack_head)
 		sa(stack);
 }
 
 void	tiny_sort_desc(t_stack **stack)
 {
-	t_node	*lowest_node;
-
-	lowest_node = (*stack)->max_value;
-	if ((*stack)->stack_head == lowest_node)
-		ra(stack);
-	else if ((*stack)->stack_head->next == lowest_node)
-		rra(stack);
-	if ((*stack)->stack_head->value < (*stack)->stack_head->next->value)
-		sa(stack);
+	while ((*stack)->stack_tail != (*stack)->min_value)
+	{
+		if ((*stack)->min_value == (*stack)->stack_head)
+			rb(stack);
+		else
+			rrb(stack);
+	}
+	if ((*stack)->max_value != (*stack)->stack_head)
+		sb(stack);
 }
