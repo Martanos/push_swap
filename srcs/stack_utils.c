@@ -6,7 +6,7 @@
 /*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 03:35:11 by malee             #+#    #+#             */
-/*   Updated: 2024/05/10 11:42:11 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/10 14:35:19 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	update_stack(t_stack **stack)
 		(*stack)->is_sorted_desc = is_sorted_descended(*stack);
 		(*stack)->min_value = find_smallest_node(stack);
 		(*stack)->max_value = find_largest_node(stack);
+		(*stack)->stack_tail = find_stack_tail(stack);
 		current = (*stack)->stack_head;
 		while (current)
 		{

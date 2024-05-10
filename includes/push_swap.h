@@ -6,7 +6,7 @@
 /*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 01:34:01 by malee             #+#    #+#             */
-/*   Updated: 2024/05/10 13:41:21 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/10 14:34:39 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int					is_sorted_descended(t_stack *stack);
 void				sort_lists(t_stack **stack_a, t_stack **stack_b);
 t_node				*find_largest_node(t_stack **stack);
 t_node				*find_smallest_node(t_stack **stack);
+t_node				*find_stack_tail(t_node *stack_head);
 void				update_stack(t_stack **stack);
 // Move utils
 void				pa(t_stack **stack_b, t_stack **stack_a);

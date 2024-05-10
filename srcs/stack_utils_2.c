@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 00:42:14 by malee             #+#    #+#             */
-/*   Updated: 2024/05/08 20:42:19 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/10 14:34:17 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,13 @@ t_node	*find_smallest_node(t_stack **stack)
 		current = current->next;
 	}
 	return (smallest);
+}
+
+t_node	*find_stack_tail(t_node *stack_head)
+{
+	if (stack_head == NULL)
+		return (NULL);
+	while (stack_head->next)
+		stack_head = stack_head->next;
+	return (stack_head);
 }
