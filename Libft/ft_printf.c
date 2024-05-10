@@ -15,7 +15,6 @@
 
 #include "libft.h"
 
-
 void	init_handlers(t_conversion_handlers *handlers)
 {
 	handlers[0] = (t_conversion_handlers){"c", &handle_char};
@@ -33,9 +32,9 @@ void	init_handlers(t_conversion_handlers *handlers)
 int	execute_handler(va_list *ap, const char **format,
 		t_conversion_handlers *handlers)
 {
-	ssize_t count;
-	const char *specifier;
-	size_t idx;
+	ssize_t		count;
+	const char	*specifier;
+	size_t		idx;
 
 	specifier = *format;
 	idx = 0;
@@ -56,10 +55,10 @@ int	execute_handler(va_list *ap, const char **format,
 
 int	ft_printf(const char *format, ...)
 {
-	va_list ap;
-	t_conversion_handlers handlers[10];
-	ssize_t count;
-	const char *str;
+	va_list					ap;
+	t_conversion_handlers	handlers[10];
+	ssize_t					count;
+	const char				*str;
 
 	init_handlers(handlers);
 	va_start(ap, format);

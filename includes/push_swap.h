@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 01:34:01 by malee             #+#    #+#             */
-/*   Updated: 2024/05/08 20:43:12 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/10 13:41:21 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,9 @@ typedef struct s_node
 {
 	ssize_t			position;
 	ssize_t			value;
-	int				cheapest_asc;
-	int				cheapest_desc;
-	ssize_t			push_price_asc;
-	ssize_t			push_price_desc;
-	struct s_node	*target_node_asc;
-	struct s_node	*target_node_desc;
+	int				cheapest;
+	ssize_t			push_price;
+	struct s_node	*target_node;
 	struct s_node	*next;
 	struct s_node	*prev;
 }					t_node;
@@ -42,10 +39,10 @@ typedef struct s_stack
 
 // General Utils
 void				error(void);
+void				set_prices(t_stack **stack_a, t_stack **stack_b);
 // Node Utils
 void				init_node(t_stack **stack, ssize_t value);
 void				free_nodes(t_stack **stack);
-void				set_prices(t_stack **stack_a, t_stack **stack_b);
 // Stack utils
 void				init_stack(t_stack **stack, char **argv);
 int					is_sorted_ascended(t_stack *stack);
@@ -66,6 +63,9 @@ void				rr(t_stack **stack_a, t_stack **stack_b);
 void				rra(t_stack **stack_a);
 void				rrb(t_stack **stack_b);
 void				rrr(t_stack **stack_a, t_stack **stack_b);
-t_node				*get_median(t_stack *stack);
+// Sort utils
+void				tiny_sort_asc(t_stack **stack);
+void				tiny_sort_desc(t_stack **stack);
+void				sort_lists(t_stack **stack_a, t_stack **stack_b);
 
 #endif

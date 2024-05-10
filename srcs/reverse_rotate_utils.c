@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 18:14:31 by malee             #+#    #+#             */
-/*   Updated: 2024/05/08 18:27:02 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/10 13:37:09 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	reverse_rotate(t_stack **stack)
 	}
 	update_stack(stack);
 }
+
 void	rra(t_stack **stack_a)
 {
 	reverse_rotate(stack_a);

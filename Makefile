@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: malee <malee@student.42.fr>                +#+  +:+       +#+         #
+#    By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 23:01:22 by malee             #+#    #+#              #
-#    Updated: 2024/05/07 02:30:50 by malee            ###   ########.fr        #
+#    Updated: 2024/05/10 13:45:23 by malee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,16 @@ LIBFT_DIR = Libft
 SRCS_DIR = srcs
 
 FILES = push_swap.c \
+		price_checker_utils.c \
 		stack_utils.c \
 		stack_utils_2.c \
 		node_utils.c \
-		algorithim_utils.c \
-		move_utils.c \
-		median_util.c
+		sort_utils.c \
+		push_utils.c \
+		swap_utils.c \
+		rotate_utils.c \
+		reverse_rotate_utils.c \
+		tiny_sort_utils.c 
 SRCS = $(addprefix $(SRCS_DIR)/,$(FILES))
 OBJS = $(SRCS:.c=.o)
 

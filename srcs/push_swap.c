@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:40:06 by malee             #+#    #+#             */
-/*   Updated: 2024/05/06 22:07:42 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/10 13:29:02 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ int	main(int argc, char **argv)
 	check_args(argc, argv);
 	init_stack(&stack_a, argv + 1);
 	init_stack(&stack_b, NULL);
-	sort_lists(&stack_a, &stack_b);
+	if (stack_a->length < 4)
+		tiny_sort_asc(&stack_a);
+	else if (stack_a->length > 3)
+		sort_lists(&stack_a, &stack_b);
 	free_nodes(&stack_a);
 	free(stack_a);
 	free_nodes(&stack_b);
