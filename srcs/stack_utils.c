@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 03:35:11 by malee             #+#    #+#             */
-/*   Updated: 2024/05/11 02:47:28 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/14 18:30:02 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	update_stack(t_stack **stack)
 	ssize_t	position;
 	t_node	*current;
 
-	position = 1;
+	position = 0;
 	if (!stack)
 		error();
 	else if ((*stack)->stack_head == NULL)
