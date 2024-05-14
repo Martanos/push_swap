@@ -6,7 +6,8 @@
 		"array": "c",
 		"functional": "c",
 		"tuple": "c",
-		"utility": "c"
+		"utility": "c",
+		"random": "c"
 	},
 	"cmake.configureOnOpen": true
 }
