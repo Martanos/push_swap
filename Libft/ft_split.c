@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
+/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:41:17 by malee             #+#    #+#             */
-/*   Updated: 2024/03/19 00:34:27 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/15 01:47:08 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static int	ft_count_words(char const *str, char c)
 	int	i;
 	int	count;
 
-	i = 0;
 	count = 0;
 	while (str[i] != '\0')
 	{
