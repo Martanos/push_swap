@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 03:35:11 by malee             #+#    #+#             */
-/*   Updated: 2024/05/14 18:30:02 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/15 22:17:41 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,14 @@ void	update_stack(t_stack **stack)
 			current = current->next;
 		}
 	}
+}
+
+void	free_stacks(t_stack **stack_a, t_stack **stack_b)
+{
+	free_nodes(stack_a);
+	free(*stack_a);
+	free_nodes(stack_b);
+	free(*stack_b);
 }
 
 // void	print_stacks(t_stack **stack_a, t_stack **stack_b)

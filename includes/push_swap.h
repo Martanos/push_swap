@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 01:34:01 by malee             #+#    #+#             */
-/*   Updated: 2024/05/11 02:47:27 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/15 22:14:32 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_stack
 void				error(void);
 void				set_prices(t_stack **stack_a, t_stack **stack_b);
 // void				print_stacks(t_stack **stack_a, t_stack **stack_b);
+void				free_stacks(t_stack **stack_a, t_stack **stack_b);
 // Node Utils
 void				init_node(t_stack **stack, ssize_t value);
 void				free_nodes(t_stack **stack);
