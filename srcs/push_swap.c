@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:40:06 by malee             #+#    #+#             */
-/*   Updated: 2024/05/15 23:31:35 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/16 00:17:15 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,24 @@ static void	check_signs(char *current_argv, int *sign_count)
 
 static void	check_args(char **argv)
 {
-	int	sign_count;
+	int		sign_count;
+	size_t	len;
+	char	**temp;
 
+	temp = argv;
+	len = 0;
+	while (*temp)
+	{
+		len++;
+		temp++;
+	}
 	while (*argv)
 	{
 		sign_count = 0;
 		if (ft_atoi(*argv) > INT_MAX || ft_atoi(*argv) < INT_MIN)
 			error();
-		check_dup(*argv, argv + 1);
+		if (len > 1)
+			check_dup(*argv, argv + 1);
 		check_signs(*argv, &sign_count);
 		argv++;
 	}

@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:39:12 by malee             #+#    #+#             */
-/*   Updated: 2024/05/15 23:25:25 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/16 00:19:40 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	tiny_sort_asc(t_stack **stack)
 		else
 			rra(stack);
 	}
-	if ((*stack)->stack_head->value > (*stack)->stack_head->next->value)
+	if ((*stack)->stack_head->next
+		&& (*stack)->stack_head->value > (*stack)->stack_head->next->value)
 		sa(stack);
 }
 
