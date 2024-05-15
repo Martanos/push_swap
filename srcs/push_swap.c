@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:40:06 by malee             #+#    #+#             */
-/*   Updated: 2024/05/15 22:14:51 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/15 23:31:35 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,9 @@ int	main(int argc, char **argv)
 		stack_a = NULL;
 		stack_b = NULL;
 		init_stack(&stack_b, NULL);
-		init_stack(&stack_a, argv + 1);
+		init_stack(&stack_a, argv);
 		if (!(is_sorted_ascended(stack_a)))
-		{
-			if (stack_a->length <= 3)
-				tiny_sort_asc(&stack_a);
-			else if (stack_a->length > 3)
-				sort_lists(&stack_a, &stack_b);
-		}
+			sort_lists(&stack_a, &stack_b);
 		free_stacks(&stack_a, &stack_b);
 	}
 	return (0);

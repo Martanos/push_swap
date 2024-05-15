@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 03:35:11 by malee             #+#    #+#             */
-/*   Updated: 2024/05/15 22:17:41 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/15 23:32:17 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_stack(t_stack **stack, char **argv)
 		free_nodes(stack);
 		free(*stack);
 	}
-	*stack = (t_stack *)malloc(sizeof(t_stack));
+	*stack = (t_stack *)malloc(sizeof(t_stack) + 1);
 	if (!*stack)
 		error();
 	ft_memset(*stack, 0, sizeof(t_stack));
