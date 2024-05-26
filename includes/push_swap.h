@@ -38,7 +38,6 @@ typedef struct s_stack
 }					t_stack;
 
 // General Utils
-void				error(void);
 void				set_prices(t_stack **stack_a, t_stack **stack_b);
 // void				print_stacks(t_stack **stack_a, t_stack **stack_b);
 void				free_stacks(t_stack **stack_a, t_stack **stack_b);

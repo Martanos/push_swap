@@ -18,7 +18,10 @@ void	init_node(t_stack **stack, ssize_t value)
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
-		error();
+	{
+		ft_printf("Error\n");
+		exit(1);
+	}
 	ft_memset(new_node, 0, sizeof(t_node));
 	new_node->value = value;
 	if ((*stack)->length == 0)

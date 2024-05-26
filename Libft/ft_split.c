@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:41:17 by malee             #+#    #+#             */
-/*   Updated: 2024/05/16 00:12:25 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/26 13:42:03 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,13 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	if (num_words == 1)
 	{
-		s2[0] = (char *)s;
+		s2[0] = ft_strdup(s);
+		if (!s2[0])
+		{
+			free(s2);
+			return (NULL);
+		}
+		s2[1] = NULL;
 		return (s2);
 	}
 	s2 = ft_split_words(s, c, s2, num_words);

@@ -21,7 +21,10 @@ void	init_stack(t_stack **stack, char **argv)
 	}
 	*stack = (t_stack *)malloc(sizeof(t_stack) + 1);
 	if (!*stack)
-		error();
+	{
+		ft_printf("Error\n");
+		exit(1);
+	}
 	ft_memset(*stack, 0, sizeof(t_stack));
 	if (argv)
 	{
@@ -55,9 +58,7 @@ void	update_stack(t_stack **stack)
 	t_node	*current;
 
 	position = 0;
-	if (!stack)
-		error();
-	else if ((*stack)->stack_head == NULL)
+	if ((*stack)->stack_head == NULL)
 		ft_memset(*stack, 0, sizeof(t_stack));
 	else
 	{
