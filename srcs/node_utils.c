@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 23:20:11 by malee             #+#    #+#             */
-/*   Updated: 2024/05/08 19:05:43 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/26 19:00:52 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	init_node(t_stack **stack, ssize_t value)
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
-	{
-		ft_printf("Error\n");
-		exit(1);
-	}
+		exit(write(STDERR_FILENO, "Error\n", 6));
 	ft_memset(new_node, 0, sizeof(t_node));
 	new_node->value = value;
 	if ((*stack)->length == 0)

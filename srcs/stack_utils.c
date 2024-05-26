@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 03:35:11 by malee             #+#    #+#             */
-/*   Updated: 2024/05/15 23:32:17 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/26 19:00:57 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	init_stack(t_stack **stack, char **argv)
 {
+	char	**temp;
+
+	temp = argv;
 	if (*stack)
 	{
 		free_nodes(stack);
@@ -21,16 +24,13 @@ void	init_stack(t_stack **stack, char **argv)
 	}
 	*stack = (t_stack *)malloc(sizeof(t_stack) + 1);
 	if (!*stack)
-	{
-		ft_printf("Error\n");
-		exit(1);
-	}
+		exit(write(STDERR_FILENO, "Error\n", 6));
 	ft_memset(*stack, 0, sizeof(t_stack));
-	if (argv)
+	if (temp)
 	{
-		while (*argv)
+		while (*temp)
 		{
-			init_node(stack, atoi(*argv++));
+			init_node(stack, atoi(*temp++));
 			update_stack(stack);
 		}
 	}

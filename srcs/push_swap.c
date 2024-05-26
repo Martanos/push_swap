@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 13:27:58 by malee             #+#    #+#             */
-/*   Updated: 2024/05/26 13:27:59 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/26 19:31:10 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,70 +25,78 @@ static void	free_args(char **argv, char **args_to_free)
 	}
 }
 
-static int	check_dup(char **argv, int len)
+static int	check_dup(char **argv, char **args_to_free)
 {
-	char	*str;
+	char	*str1;
+	char	**str2;
+	ssize_t	len;
 
-	str = NULL;
+	str1 = *argv;
+	str2 = argv + 1;
+	len = -1;
+	while (argv[++len])
+		;
 	if (len == 1)
-		return (1);
-	else
+		return (0);
+	while (*str2)
 	{
-		str = *argv;
-		argv++;
+		if (ft_atoi(str1) == ft_atoi(*str2))
+		{
+			free_args(argv, args_to_free);
+			exit(write(STDERR_FILENO, "Error\n", 6));
+		}
+		str2++;
 	}
-	while (*argv)
-	{
-		if (ft_strncmp(str, *argv, ft_strlen(str) + 1) == 0)
-			return (0);
-		argv++;
-	}
-	return (1);
+	return (0);
 }
 
 static int	check_signs(char *current_argv)
 {
 	int	sign_count;
+	int	len;
 
 	sign_count = 0;
-	while (*current_argv)
+	len = 0;
+	while (current_argv[len])
 	{
-		if (*current_argv == '-' || *current_argv == '+')
+		if ((current_argv[len] == '-' || current_argv[len] == '+') && len == 0)
 		{
 			sign_count++;
-			current_argv++;
+			len++;
+			if (current_argv[len - 1] == '-' && current_argv[len] == '0')
+				return (1);
 		}
-		if (sign_count > 1 || !ft_isdigit(*current_argv))
-			return (0);
-		current_argv++;
+		if (sign_count > 1 || !ft_isdigit(current_argv[len]))
+			return (1);
+		len++;
 	}
-	return (1);
+	return (0);
 }
 
 static void	check_args(char **argv, char **args_to_free)
 {
-	ssize_t	len;
 	int		error;
+	char	**temp;
 
-	len = -1;
-	error = 1;
-	while (argv[++len])
-		;
-	while (*argv)
+	error = 0;
+	temp = argv;
+	error += (*temp == NULL);
+	while (*temp)
 	{
-		if (ft_atoi(*argv) > INT_MAX || ft_atoi(*argv) < INT_MIN)
-			error = 0;
-		if (!check_dup(argv, len))
-			error = 0;
-		if (!check_signs(*argv))
-			error = 0;
-		argv++;
+		error += check_signs(*temp);
+		error += (ft_atoi(*temp) > INT_MAX || ft_atoi(*temp) < INT_MIN);
+		temp++;
 	}
-	if (!error)
+	if (error)
 	{
 		free_args(argv, args_to_free);
-		ft_printf("Error\n");
-		exit(1);
+		exit(write(STDERR_FILENO, "Error\n", 6));
+	}
+	temp = argv;
+	while (*temp)
+	{
+		check_dup(temp, args_to_free);
+		temp++;
 	}
 }
 
@@ -112,10 +120,10 @@ int	main(int argc, char **argv)
 		stack_b = NULL;
 		init_stack(&stack_b, NULL);
 		init_stack(&stack_a, argv);
+		free_args(argv, args_to_free);
 		if (!(is_sorted_ascended(stack_a)))
 			sort_lists(&stack_a, &stack_b);
 		free_stacks(&stack_a, &stack_b);
-		free_args(argv, args_to_free);
 	}
-	return (0);
+	return (1);
 }
