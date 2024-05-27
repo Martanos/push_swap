@@ -6,14 +6,14 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 01:34:01 by malee             #+#    #+#             */
-/*   Updated: 2024/05/15 22:14:32 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/28 03:46:12 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "libft.h"
+# include "../Libs/Libft/includes/libft.h"
 
 typedef struct s_node
 {

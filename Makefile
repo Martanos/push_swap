@@ -6,18 +6,18 @@
 #    By: malee <malee@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 23:01:22 by malee             #+#    #+#              #
-#    Updated: 2024/05/15 23:29:49 by malee            ###   ########.fr        #
+#    Updated: 2024/05/28 04:01:21 by malee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-CC = cc
-CFLAGS = -Os -Wall -Wextra -Werror -g -I$(LIBFT_DIR) -I$(INCLUDES_DIR) -I$(SRCS_DIR)
-INCLUDES_DIR = includes
-LIBFT_DIR = Libft
-SRCS_DIR = srcs
 
-FILES = push_swap.c \
+# Compiler and Compiler flags
+CC = cc
+CFLAGS = -Os -Wall -Wextra -Werror -g
+
+# C files
+CFILES = push_swap.c \
 		price_checker_utils.c \
 		stack_utils.c \
 		stack_utils_2.c \
@@ -28,31 +28,54 @@ FILES = push_swap.c \
 		rotate_utils.c \
 		reverse_rotate_utils.c \
 		tiny_sort_utils.c
-SRCS = $(addprefix $(SRCS_DIR)/,$(FILES))
-OBJS = $(SRCS:.c=.o)
+SRC_DIR = srcs
+SRCS = $(addprefix $(SRC_DIR)/,$(CFILES))
 
-all: libft $(NAME)
+# Helper file directory
+INCLUDE_DIR = includes
 
-libft:
-	$(MAKE) -C $(LIBFT_DIR)
+# Libraries
+LIBRARIES = Libft
+LIBS_DIR = Libs
+LIBS = $(addprefix $(LIBS_DIR)/,$(LIBRARIES))
+LIBFLAGS = -lft
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFT_DIR) -lft
+# Objects
+OBJ_DIR = ./obj
+OBJS = $(addprefix $(OBJ_DIR)/, $(CFILES:%.c=%.o))
 
-$(OBJS): | $(INCLUDES_DIR)
+all: $(NAME)
 
-$(INCLUDES_DIR):
-	mkdir -p $(INCLUDES_DIR)
+$(NAME): $(OBJ_DIR) $(OBJS)
+	@for dir in $(LIBS); do \
+        echo "Making $$dir"; \
+        cd $$dir && $(MAKE); \
+		cd -; \
+    done
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(addprefix -L,$(LIBS)) $(LIBFLAGS)
 
-$(SRCS_DIR)/%.o: $(SRCS_DIR)/%.c $(INCLUDES_DIR)/push_swap.h
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | $(OBJ_DIR)
+	@$(CC) -I$(INCLUDE_DIR) -c $< -o $@
 
 clean:
-	$(MAKE) -C $(LIBFT_DIR) clean
-	rm -f $(OBJS)
+	@for dir in $(LIBS); do \
+        echo "Cleaning $$dir"; \
+        cd $$dir && $(MAKE) clean; \
+		cd -; \
+    done
+	@$(RM) -rf $(OBJ_DIR)
 
 fclean: clean
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	rm -f $(NAME)
+	@for dir in $(LIBS); do \
+        echo "Full Cleaning $$dir"; \
+        cd $$dir && $(MAKE) fclean; \
+		cd -; \
+    done
+	@$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

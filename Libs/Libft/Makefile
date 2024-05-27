@@ -3,20 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+         #
+#    By: malee <malee@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/06 20:12:49 by malee             #+#    #+#              #
-#    Updated: 2024/04/08 15:47:35 by malee            ###   ########.fr        #
+#    Updated: 2024/05/28 04:02:52 by malee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
-AR = ar rcs
-RM = rm -f
 
-SRCS = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
+# Compiler and Compiler flags
+CC = cc
+CFLAGS = -Os -Wall -Wextra -Werror -g
+
+# C files
+CFILES = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
        ft_memchr.c ft_memcmp.c ft_strlen.c ft_strlcpy.c ft_strlcat.c \
        ft_strchr.c ft_strrchr.c ft_strnstr.c ft_strncmp.c ft_atoi.c \
        ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
@@ -28,22 +29,35 @@ SRCS = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
        ft_lstiter.c ft_lstmap.c \
        ft_printf.c ft_printf_char_utils.c ft_printf_integer_utils.c \
        get_next_line.c get_next_line_utils.c
+SRC_DIR = srcs
+SRCS = $(addprefix $(SRC_DIR)/,$(CFILES))
 
-OBJS = $(SRCS:.c=.o)
+# Helper file directory
+INCLUDE_DIR = includes
+
+# Objects
+OBJ_DIR = ./obj
+OBJS = $(addprefix $(OBJ_DIR)/, $(CFILES:%.c=%.o))
 
 all: $(NAME)
 
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | $(OBJ_DIR)
+	@$(CC) -I$(INCLUDE_DIR) -c $< -o $@
+
 $(NAME): $(OBJS)
-	$(AR) $@ $^
+	@ar rf $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) -rf $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 

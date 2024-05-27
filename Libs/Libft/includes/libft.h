@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malee <malee@42mail.sutd.edu.sg>           +#+  +:+       +#+        */
+/*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 14:46:48 by malee             #+#    #+#             */
-/*   Updated: 2024/05/10 13:37:31 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/28 03:40:03 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 typedef struct s_conversion_handlers
 {
 	char			*specifier;
-	ssize_t			(*handler)(va_list * args);
+	ssize_t			(*handler)(va_list *args);
 }					t_conversion_handlers;
 
 int					ft_printf(const char *__format, ...);

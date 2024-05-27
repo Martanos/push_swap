@@ -6,7 +6,7 @@
 /*   By: malee <malee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 13:27:58 by malee             #+#    #+#             */
-/*   Updated: 2024/05/26 19:31:10 by malee            ###   ########.fr       */
+/*   Updated: 2024/05/28 03:21:23 by malee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	check_dup(char **argv, char **args_to_free)
 		if (ft_atoi(str1) == ft_atoi(*str2))
 		{
 			free_args(argv, args_to_free);
-			exit(write(STDERR_FILENO, "Error\n", 6));
+			exit(write(STDERR_FILENO, "Error\n", 6) > 0);
 		}
 		str2++;
 	}
@@ -90,7 +90,7 @@ static void	check_args(char **argv, char **args_to_free)
 	if (error)
 	{
 		free_args(argv, args_to_free);
-		exit(write(STDERR_FILENO, "Error\n", 6));
+		exit(write(STDERR_FILENO, "Error\n", 6) > 0);
 	}
 	temp = argv;
 	while (*temp)
@@ -125,5 +125,5 @@ int	main(int argc, char **argv)
 			sort_lists(&stack_a, &stack_b);
 		free_stacks(&stack_a, &stack_b);
 	}
-	return (1);
+	return (0);
 }
